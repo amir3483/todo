@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فرم یک</title>
+</head>
+
+<body dir="rtl">
+    <form method="POST" action="{% url 'post_form1' %}">
+        {% csrf_token %}
+        <h4 style="text-align:center">فرم یک : گزارش بازدید ماهانه از وضعیت سلامت ایستگاه</h4><br>
+        <div>
+            <div>
+                <label for="month">گزارش ماه :</label><br>
+                <input type="text" name="month" id="month" size="10"><br><br>
+            </div>
+            <div>
+                <label for="region">منطقه :</label><br>
+                <input type="text" name="region" id="region" size="10"><br><br>
+            </div>
+            <div>
+                <label for="station_name">نام ایستگاه :</label><br>
+                <input type="text" name="station_name" id="station_name" size="10"><br><br>
+            </div>
+        </div>
+        <div>
+            <table style="text-align:center" border="1">
+
+                <thead>
+                    <tr>
+                        <th>ردیف</th>
+                        <th>مورد بازدید</th>
+                        <th>گزارش وضعیت</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><label for="row1">قفل بودن درب محوطه ایستگاه</label></td>
+                        <td><textarea name="row1" id="row1" rows="3" cols="20"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><label for="row2">قفل بودن درب جعبه تجهیزات</label></td>
+                        <td><textarea name="row2" id="row2" rows="3" cols="20"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><label for="row3">عدم وجود آب، برف، علوفه، زباله، نخاله و... در محوطه ایستگاه و اطراف</label></td>
+                        <td><textarea name="row3" id="row3" rows="3" cols="20"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><label for="row4">عدم گسترش پوشش گیاهی موجود (درختان و...) در محوطه و اطراف ایستگاه</label></td>
+                        <td><textarea name="row4" id="row4" rows="3" cols="20"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><label for="row5">عدم انجام عملیات عمرانی در محوطه ایستگاه و اطراف</label></td>
+                        <td><textarea name="row5" id="row5" rows="3" cols="20"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><label for="row6">عدم وجود هرگونه مانع و تجهیزات در مجاورت ایستگاه تا فاصله 2 متری</label></td>
+                        <td><textarea name="row6" id="row6" rows="3" cols="20"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><label for="row7">کنترل وضعیت برق ایستگاه</label></td>
+                        <td><textarea name="row7" id="row7" rows="3" cols="20"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><label for="row8">وضعیت سیستمهای ارتباطی و آنتن خارجی</label></td>
+                        <td><textarea name="row8" id="row8" rows="3" cols="20"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td><label for="row9">تعداد و تاریخ مراجعه اضطراری به ایستگاه</label></td>
+                        <td><textarea name="row9" id="row9" rows="3" cols="20"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td><label for="row10">سایر موارد - موارد اعلامی از سوی سازمان</label></td>
+                        <td><textarea name="row10" id="row10" rows="3" cols="20"></textarea></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <div>
+            <label for="report_date">تاریخ تهیه گزارش :</label>&nbsp&nbsp
+            <input type="date" name="report_date" id="report_date" required>
+        </div>
+        <br>
+
+        <div>
+            <label for="responsible1_name">نام مسئول تهیه گزارش :</label><br>
+            <input type="text" name="responsible1_name" id="responsible1_name" size="10"><br><br>
+            <div style="display: none">
+                <label for="responsible1_signature">امضاء مسئول تهیه گزارش :</label><br>
+                <input type="file" id="responsible1_signature" name="responsible1_signature"><br><br><br>
+                <br><br><br>
+            </div>
+
+
+        </div>
+
+        <div>
+            {% csrf_token %} {% if request.user.username == 'adminSuperUser' or request.user.username == 'superadmin'%}
+            <div>
+                <label for="responsible2_name">نام مسئول تایید گزارش :</label><br>
+                <input type="text" name="responsible2_name" id="responsible2_name" size="10"><br><br>
+            </div>
+            {% endif %}
+            <div style="display: none">
+                <label for="responsible2_signature">امضاء مسئول تایید گزارش :</label><br>
+                <input type="file" id="responsible2_signature" name="responsible2_signature"><br><br><br>
+            </div>
+        </div>
+
+        <div style="text-align:center">
+            <input type="submit" value="ثبت اطلاعات"> &nbsp;&nbsp;&nbsp;
+            <input type="reset" value="Reset">
+            <br><br>
+            <a href="{% url 'logout_user' %}" title="خروج" style="text-decoration:none ; color:black">خروج</a> <br><br>
+            <a href="{% url 'index' %}" style="text-decoration:none ; color:black">بازگشت</a>
+        </div>
+    </form>
+
+
+
+</body>
+
+</html>

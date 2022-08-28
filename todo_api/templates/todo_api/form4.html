@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فرم دو</title>
+</head>
+
+<body dir="rtl">
+    <h4 style="text-align:center"> ویرایش فرم دو </h4><br>
+    <h4 style="text-align:center">فرم دو : گزارش ثبت داده جهت محاسبه سرعت و دبی ایستگاه های سطح سنج</h4><br>
+    <form method="" action="">
+        <table style="text-align:center" border="1">
+            {% for x in myform2 %}
+            <tr style="display: none">
+                <td><label>ID</label></td>
+                <td>{{ x.id }}</td>
+            </tr>
+            <tr>
+                <td><label>گزارش ماه</label></td>
+                <td>{{ x.month }}</td>
+            </tr>
+            <tr>
+                <td><label>منطقه</label></td>
+                <td>{{ x.region }}</td>
+            </tr>
+            <tr>
+                <td><label>نام ایستگاه</label></td>
+                <td>{{ x.station_name }}</td>
+            </tr>
+            <tr>
+                <td><label> فاصله بین دو نقطه نوبت اول</label></td>
+                <td>{{ x.distance1 }}</td>
+            </tr>
+            <tr>
+                <td><label>فاصله بین دو نقطه نوبت دوم</label></td>
+                <td>{{ x.distance2 }}</td>
+            </tr>
+            <tr>
+                <td><label>فاصله بین دو نقطه نوبت سوم</label></td>
+                <td>{{ x.distance3 }}</td>
+            </tr>
+            <tr>
+                <td><label>زمان پیمایش نوبت اول</label></td>
+                <td>{{ x.scrolling_time1 }}</td>
+            </tr>
+            <tr>
+                <td><label>زمان پیمایش نوبت دوم</label></td>
+                <td>{{ x.scrolling_time2 }}</td>
+            </tr>
+            <tr>
+                <td><label>زمان پیمایش نوبت سوم</label></td>
+                <td>{{ x.scrolling_time3 }}</td>
+            </tr>
+            <tr>
+                <td><label>ارتفاع آب نوبت اول</label></td>
+                <td>{{ x.water_height1 }}</td>
+            </tr>
+            <tr>
+                <td><label>ارتفاع آب نوبت دوم</label></td>
+                <td>{{ x.water_height2 }}</td>
+            </tr>
+            <tr>
+                <td><label>ارتفاع آب نوبت سوم</label></td>
+                <td>{{ x.water_height3 }}</td>
+            </tr>
+            <tr>
+                <td><label>عمق کانال</label></td>
+                <td>{{ x.channel_depth }}</td>
+            </tr>
+            <tr>
+                <td><label>عرض کانال</label></td>
+                <td>{{ x.channel_width }}</td>
+            </tr>
+            <tr>
+                <td><label>تاریخ تهیه گزارش :</label></td>
+                <td>{{ x.report_date }}</td>
+            </tr>
+            <tr>
+                <td><label>نام مسئول تهیه گزارش :</label></td>
+                <td>{{ x.responsible1_name }}</td>
+            </tr>
+            <tr style="display: none">
+                <td><label>امضاء مسئول تهیه گزارش :</label></td>
+                <td>{{ x.responsible1_signature }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="background-color:dimgray"><br></td>
+            </tr>
+            <tr>
+                <td><label>نام مسئول تایید گزارش :</label></td>
+                <td>{{ x.responsible2_name }}</td>
+            </tr>
+            <tr style="display: none">
+                <td><label>امضاء مسئول تایید گزارش :</label></td>
+                <td>{{ x.responsible2_signature }}</td>
+            </tr>
+            <tr>
+                <td><b><a href="delete2/{{ x.id }}" style="text-decoration:none ; color:black">حذف</a></b></td>
+                <td><b><a href="update2/{{ x.id }}" style="text-decoration:none ; color:black">ویرایش</a></b></td>
+
+            </tr>
+            {% csrf_token %} {% if request.user.username == 'adminSuperUser' or request.user.username == 'superadmin' or request.user.username == 'StaffSecretary' %}
+            <div>
+                <tr>
+                    <td><b><a href="{% url 'form5' %}" style="text-decoration:none ; color:black">علت عدم تایید</a></b></td>
+                    <td><b><a href="update4/{{ x.id }}" style="text-decoration:none ; color:black">تایید نهایی</a></b></td>
+                </tr>
+            </div>
+            {% endif %}
+            <tr>
+                <td colspan="2" style="background-color:black"><br></td>
+            </tr>
+            {% endfor %}
+        </table>
+
+
+    </form>
+    <div style="text-align:center">
+        <a href="{% url 'logout_user' %}" title="خروج" style="text-decoration:none ; color:black">خروج</a><br><br>
+        <a href="{% url 'index' %}" style="text-decoration:none ; color:black">بازگشت</a>
+        <br>
+    </div>
+
+</body>
+
+</html>

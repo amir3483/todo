@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فرم دو</title>
+</head>
+
+<body dir="rtl">
+    <h4 style="text-align:center">فرم دو : گزارش ثبت داده جهت محاسبه سرعت و دبی ایستگاه های سطح سنج</h4><br>
+    <form method="" action="">
+        <table style="text-align:center" border="1">
+            {% for x in myform8 %}
+            <tr style="display: none">
+                <td><label>ID</label></td>
+                <td>{{ x.id }}</td>
+            </tr>
+            <tr>
+                <td><label>گزارش ماه</label></td>
+                <td>{{ x.month }}</td>
+            </tr>
+            <tr>
+                <td><label>منطقه</label></td>
+                <td>{{ x.region }}</td>
+            </tr>
+            <tr>
+                <td><label>نام ایستگاه</label></td>
+                <td>{{ x.station_name }}</td>
+            </tr>
+            <tr>
+                <td><label>تاریخ تهیه گزارش :</label></td>
+                <td>{{ x.report_date }}</td>
+            </tr>
+            <tr>
+                <td><label>نام مسئول تهیه گزارش :</label></td>
+                <td>{{ x.responsible1_name }}</td>
+            </tr>
+            <tr style="display: none">
+                <td><label>امضاء مسئول تهیه گزارش :</label></td>
+                <td>{{ x.responsible1_signature }}</td>
+            </tr>
+            <tr>
+                <td><label>نام مسئول تایید گزارش :</label></td>
+                <td>{{ x.responsible2_name }}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><b><a href="update6/{{ x.id }}" style="text-decoration:none ; color:black">مشاهده</a></b></td>
+            </tr>
+            {% csrf_token %} {% if request.user.username == 'adminSuperUser' or request.user.username == 'superadmin' %}
+            <div>
+                <tr>
+                    <td><b><a href="delete5/{{ x.id }}" style="text-decoration:none ; color:black">حذف</a></b></td>
+                    <td><b><a href="update8/{{ x.id }}" style="text-decoration:none ; color:black">ویرایش</a></b></td>
+                </tr>
+                {% endif %}
+            </div>
+            <tr>
+                <td colspan="2" style="background-color:black"><br></td>
+            </tr>
+            {% endfor %}
+        </table>
+
+
+    </form>
+    <div style="text-align:center">
+        <a href="{% url 'logout_user' %}" title="خروج" style="text-decoration:none ; color:black">خروج</a><br><br>
+        <a href="{% url 'index' %}" style="text-decoration:none ; color:black">بازگشت</a>
+    </div>
+
+</body>
+
+</html>

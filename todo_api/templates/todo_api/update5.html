@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>update1</title>
+</head>
+
+
+<body dir="rtl">
+    <form action="" method="post">
+        {% csrf_token %}
+        <h4 style="text-align:center">فرم یک : گزارش بازدید ماهانه از وضعیت سلامت ایستگاه</h4><br>
+        <div>
+
+            <div>
+                <label for="month">گزارش ماه :</label><br>
+                <input type="text" name="month" id="month" size="10" value="{{ myform5.month }}" readonly><br><br>
+            </div>
+            <div>
+                <label for="region">منطقه :</label><br>
+                <input type="text" name="region" id="region" size="10" value="{{ myform5.region }}" readonly><br><br>
+            </div>
+            <div>
+                <label for="station_name">نام ایستگاه :</label><br>
+                <input type="text" name="station_name" id="station_name" size="10" value="{{ myform5.station_name }}" readonly><br><br>
+            </div>
+        </div>
+        <div>
+            <table style="text-align:center" border="1">
+
+                <thead>
+                    <tr>
+                        <th>ردیف</th>
+                        <th>مورد بازدید</th>
+                        <th>گزارش وضعیت</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><label for="row1">قفل بودن درب محوطه ایستگاه</label></td>
+                        <td><input type="text" name="row1" id="row1" size="40" value="{{ myform5.row1 }}" readonly></td>
+
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><label for="row2">قفل بودن درب جعبه تجهیزات</label></td>
+                        <td><input type="text" name="row2" id="row2" size="40" value="{{ myform5.row2 }}" readonly></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><label for="row3">عدم وجود آب، برف، علوفه، زباله، نخاله و... در محوطه ایستگاه و اطراف</label></td>
+                        <td><input type="text" name="row3" id="row3" size="40" value="{{ myform5.row3 }}" readonly></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><label for="row4">عدم گسترش پوشش گیاهی موجود (درختان و...) در محوطه و اطراف ایستگاه</label></td>
+                        <td><input type="text" name="row4" id="row4" size="40" value="{{ myform5.row4 }}" readonly></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><label for="row5">عدم انجام عملیات عمرانی در محوطه ایستگاه و اطراف</label></td>
+                        <td><input type="text" name="row5" id="row5" size="40" value="{{ myform5.row5 }}" readonly></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><label for="row6">عدم وجود هرگونه مانع و تجهیزات در مجاورت ایستگاه تا فاصله 2 متری</label></td>
+                        <td><input type="text" name="row6" id="row6" size="40" value="{{ myform5.row6 }}" readonly></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><label for="row7">کنترل وضعیت برق ایستگاه</label></td>
+                        <td><input type="text" name="row7" id="row7" size="40" value="{{ myform5.row7 }}" readonly></td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><label for="row8">وضعیت سیستمهای ارتباطی و آنتن خارجی</label></td>
+                        <td><input type="text" name="row8" id="row8" size="40" value="{{ myform5.row8 }}" readonly></td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td><label for="row9">تعداد و تاریخ مراجعه اضطراری به ایستگاه</label></td>
+                        <td><input type="text" name="row9" id="row9" size="40" value="{{ myform5.row9 }}" readonly></td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td><label for="row10">سایر موارد - موارد اعلامی از سوی سازمان</label></td>
+                        <td><input type="text" name="row10" id="row10" size="40" value="{{ myform5.row10 }}" readonly></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <div>
+            <label for="report_date">تاریخ تهیه گزارش :</label>&nbsp&nbsp
+            <td>{{ myform5.report_date }}</td>
+        </div>
+        <br>
+
+        <div>
+            <label for="responsible1_name">نام مسئول تهیه گزارش :</label><br>
+            <input type="text" name="responsible1_name" id="responsible1_name" size="10" value="{{ myform5.responsible1_name }}" readonly><br><br>
+            <div style="display: none">
+                <label for="responsible1_signature">امضاء مسئول تهیه گزارش :</label><br>
+                <input type="file" id="responsible1_signature" name="responsible1_signature" value="{{ myform5.responsible1_signature }}" readonly><br><br><br>
+                <br><br><br>
+            </div>
+
+
+        </div>
+        {% csrf_token %} {% if request.user.username == 'adminSuperUser' or request.user.username == 'dashboard' or request.user.username == 'superadmin' %}
+        <div>
+            <label for="responsible2_name">نام مسئول تایید گزارش :</label><br>
+            <input type="text" name="responsible2_name" id="responsible2_name" size="10" value="{{ myform5.responsible2_name }}" readonly><br><br>
+            <div style="display: none">
+                <label for="responsible2_signature">امضاء مسئول تایید گزارش :</label><br>
+                <input type="file" id="responsible2_signature" name="responsible2_signature" value="{{ myform5.responsible2_signature }}" readonly><br><br><br>
+            </div>
+        </div>
+        {% endif %}
+
+
+        <br><br>
+        <a href="{% url 'logout_user' %}" title="خروج" style="text-decoration:none ; color:black">خروج</a> <br><br>
+        <a href="{% url 'index' %}" style="text-decoration:none ; color:black">بازگشت</a><br>
+
+    </form>
+    <br>
+    <div style="text-align:center">
+        <button onclick="history.back()">بازگشت به صفحه قبل</button>
+    </div>
+
+
+
+</body>
+
+</html>

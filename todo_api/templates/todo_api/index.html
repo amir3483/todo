@@ -1,0 +1,64 @@
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحه اصلی</title>
+</head>
+
+<body dir="rtl">
+    {% csrf_token %} {% if user.is_authenticated %}
+    <div>
+
+        <h3>فرم های گزارش</h3><br><br>
+        <h4>سلام {{user.username}}</h4>
+        {% csrf_token %} {% if request.user.username == 'adminSuperUser' or request.user.username == 'superadmin' or request.user.username == 'StationReportTransmitter' %}
+        <div>
+            <p><a href="{% url 'form1' %}" title="فرم یک" style="text-decoration:none ; color:black">فرم یک : گزارش بازدید ماهانه از وضعیت سلامت ایستگاه</a></p>
+            <p><a href="{% url 'form2' %}" title="فرم دو" style="text-decoration:none ; color:black">فرم دو : گزارش ثبت داده جهت محاسبه سرعت و دبی ایستگاه های سطح سنج</a></p><br>
+        </div>
+        {% endif %} {% csrf_token %} {% if request.user.username == 'adminSuperUser' or request.user.username == 'superadmin' or request.user.username == 'StationReportTransmitter' or request.user.username == 'StaffSecretary' %}
+        <div>
+            <p><a href="{% url 'form3' %}" title="فرم یک" style="text-decoration:none ; color:black">فرم یک - مشاهده و ویرایش و حذف </a></p>
+            <p><a href="{% url 'form4' %}" title="فرم دو" style="text-decoration:none ; color:black">فرم دو - مشاهده و ویرایش و حذف </a></p><br>
+        </div>
+        {% endif %} {% csrf_token %} {% if request.user.username == 'adminSuperUser' or request.user.username == 'superadmin' or request.user.username == 'StaffSecretary' %}
+        <div>
+            <p><a href="{% url 'form5' %}" title="فرم " style="text-decoration:none ; color:black">علت عدم تایید گزارش </a></p>
+        </div>
+        {% endif %} {% csrf_token %} {% if request.user.username != 'dashboard' %}
+        <div>
+            <p><a href="{% url 'form6' %}" title="فرم " style="text-decoration:none ; color:black">مشاهده علت عدم تایید گزارش </a></p><br>
+        </div>
+        {% endif %} {% csrf_token %} {% if request.user.username == 'adminSuperUser' or request.user.username == 'superadmin' or request.user.username == 'dashboard' %}
+        <div>
+            <p><a href="{% url 'form7' %}" title="فرم " style="text-decoration:none ; color:black">فرم یک - نهایی</a></p>
+            <p><a href="{% url 'form8' %}" title="فرم " style="text-decoration:none ; color:black">فرم دو - نهایی</a></p>
+        </div>
+        {% endif %}
+        <br>
+
+        <br><br>
+        <a href="{% url 'logout_user' %}" title="خروج" style="text-decoration:none ; color:black">خروج</a> {% else %}
+        <div>
+            <table style="border-style:groove; padding: 10px;">
+                <tbody>
+                    <td>
+                        <b>لطفا وارد شوید</b><br><br>
+                        <a href="{% url 'login' %}" style="text-decoration:none ; color:black">Login</a>
+                    </td>
+                </tbody>
+            </table>
+
+        </div>
+        {% endif %}
+    </div>
+
+
+</body>
+
+</html>

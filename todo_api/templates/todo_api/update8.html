@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>update2</title>
+</head>
+
+
+<body dir="rtl">
+    <form action="updaterecord4/{{ myform4.id }}" method="post">
+        {% csrf_token %}
+        <h4 style="text-align:center">یه روز رسانی فرم دو</h4><br>
+        <h4 style="text-align:center">فرم دو : گزارش ثبت داده جهت محاسبه سرعت و دبی ایستگاه های سطح سنج</h4><br>
+        <div>
+            <div>
+                <label for="month">گزارش ماه :</label><br>
+                <input type="text" name="month" id="month" size="10" value="{{ myform4.month }}"><br><br>
+            </div>
+            <div>
+                <label for="region">منطقه :</label><br>
+                <input type="text" name="region" id="region" size="10" value="{{ myform4.region }}"><br><br>
+            </div>
+            <div>
+                <label for="station_name">نام ایستگاه :</label><br>
+                <input type="text" name="station_name" id="station_name" size="10" value="{{ myform4.station_name }}"><br><br>
+            </div>
+        </div>
+        <div>
+            <table style="text-align:center" border="1">
+
+                <thead>
+                    <tr>
+                        <th>نوبت اندازه گیری</th>
+                        <th>فاصله بین دو نقطه(متر)</th>
+                        <th>زمان پیمایش(ثانیه) </th>
+                        <th>ارتفاع آب(متر) </th>
+                        <th>عمق کانال(متر) </th>
+                        <th>عرض کانال(متر) </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><input type="number" name="distance1" id="distance1" value="{{ myform4.distance1 }}" required></td>
+                        <td><input type="number" name="scrolling_time1" id="scrolling_time1" value="{{ myform4.scrolling_time1 }}" required></td>
+                        <td><input type="number" name="water_height1" id="water_height1" value="{{ myform4.water_height1 }}" required></td>
+                        <td rowspan="3"><input type="number" name="channel_depth" id="channel_depth" value="{{ myform4.channel_depth }}" required></td>
+                        <td rowspan="3"><input type="number" name="channel_width" id="channel_width" value="{{ myform4.channel_width }}" required></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><input type="number" name="distance2" , id="distance2" value="{{ myform4.distance2 }}" required></td>
+                        <td><input type="number" name="scrolling_time2" , id="scrolling_time2" value="{{ myform4.scrolling_time2 }}" required></td>
+                        <td><input type="number" name="water_height2" , id="water_height2" value="{{ myform4.water_height2 }}" required></td>
+
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><input type="number" name="distance3" , id="distance3" value="{{ myform4.distance3 }}" required></td>
+                        <td><input type="number" name="scrolling_time3" , id="scrolling_time3" value="{{ myform4.scrolling_time3 }}" required></td>
+                        <td><input type="number" name="water_height3" , id="water_height3" value="{{ myform4.water_height3 }}" required></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <div>
+            <label for="report_date">تاریخ تهیه گزارش :</label>&nbsp&nbsp
+            <td>{{ myform4.report_date }}</td>
+        </div>
+        <br>
+        <div>
+            <label for="responsible1_name">نام مسئول تهیه گزارش :</label><br>
+            <input type="text" name="responsible1_name" id="responsible1_name" size="10" value="{{ myform4.responsible1_name }}"><br><br>
+            <div style="display: none">
+                <label for="responsible1_signature">امضاء مسئول تهیه گزارش :</label><br>
+                <input type="file" id="responsible1_signature" name="responsible1_signature" value="{{ myform4.responsible1_signature }}"><br><br><br>
+            </div>
+        </div>
+        {% csrf_token %} {% if request.user.username == 'adminSuperUser' or request.user.username == 'dashboard' or request.user.username == 'superadmin' %}
+        <div>
+            <label for="responsible2_name">نام مسئول تایید گزارش :</label><br>
+            <input type="text" name="responsible2_name" id="responsible2_name" size="10" value="{{ myform4.responsible2_name }}"><br><br>
+            <div style="display: none">
+                <label for="responsible2_signature">امضاء مسئول تایید گزارش :</label><br>
+                <input type="file" id="responsible2_signature" name="responsible2_signature" value="{{ myform4.responsible2_signature }}"><br><br><br>
+            </div>
+        </div>
+        {% endif %}
+        <div style="text-align:center">
+            <input type="submit" value="ثبت اطلاعات"> &nbsp;&nbsp;&nbsp;
+            <input type="reset" value="Reset">
+            <br><br>
+            <a href="{% url 'logout_user' %}" title="خروج" style="text-decoration:none ; color:black">خروج</a> <br><br>
+            <a href="{% url 'index' %}" style="text-decoration:none ; color:black">بازگشت</a>
+            <br>
+        </div>
+
+    </form>
+    <br>
+    <div style="text-align:center">
+        <button onclick="history.back()">بازگشت به صفحه قبل</button>
+    </div>
+
+</body>
+
+
+
+</html>
